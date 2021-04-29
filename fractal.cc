@@ -1,25 +1,12 @@
 #include "colors.h"
+#include "base.h"
 #include <utility>
-#include <complex>
 using namespace std;
 
-//how many time to iterate mandelbrot (higher number = more precision)
-size_t iterations = 20;
-//Radius to determine whether that value of C tends towards infinity
-#define max_radius 2
 //how much to zoom in when using w/a
 #define zoom_scale 0.1
 //how many pixels to move by when using arrow keys (is also scaled by screen size and zoom, so its not really one pixel per step)
 #define step_size 3
-
-bool mandelbrot_test(const complex<long double> &c) {
-    complex<long double> result;
-    for (size_t i = 0; i < iterations; i++) {
-        result = (result * result) + c;
-        if ((result.real() - c.real())*(result.real() - c.real()) + (result.imag() - c.imag())*(result.imag() - c.imag()) > max_radius*max_radius) return false;
-    }
-    return true;
-}
 
 int main() {
     int rows,cols;
@@ -33,7 +20,7 @@ int main() {
     set_raw_mode(true);
     while (true) {
         if (redraw) {
-            system("clear");
+            int shh = system("clear");
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
                     long double cal_row = ((rows/2 - 1) - i)/zoom + cur_y, cal_col = (j - (cols/2 - 1))/zoom + cur_x;
