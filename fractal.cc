@@ -1,6 +1,8 @@
 #include "colors.h"
 #include "base.h"
 #include <utility>
+#include <functional>
+#include <vector>
 using namespace std;
 
 //how much to zoom in when using w/a
@@ -11,6 +13,8 @@ using namespace std;
 int main() {
     int rows,cols;
     long double zoom = 0.5;
+    vector<complex<long double> (*)(const complex<long double>&,const complex<long double>&)> fractals = {&mandelbrot,&burning_ship,&mandelbrot3};
+    size_t fractal_index = 0;
     char in_set = 'x', out_set = ' ';
     pair<int,int> term_size = get_terminal_size();
     rows = term_size.first;
@@ -21,11 +25,12 @@ int main() {
     while (true) {
         if (redraw) {
             int shh = system("clear");
+            shh = shh;
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
                     long double cal_row = ((rows/2 - 1) - i)/zoom + cur_y, cal_col = (j - (cols/2 - 1))/zoom + cur_x;
                     complex<long double> c(cal_col/(cols/2), cal_row/(rows/2));
-                    cout << (mandelbrot_test(c) ? in_set : out_set);
+                    cout << (fractal(c,fractals.at(fractal_index)) ? in_set : out_set);
                 }
                 cout << '\n';
             }
@@ -46,6 +51,7 @@ int main() {
             cur_x = cur_y = 0;
             zoom = 0.5;
         }
+        else if (ch == 'c') fractal_index = (fractal_index + 1) % fractals.size();
         else if (ch == 'i') swap(in_set,out_set);
         else redraw = false;
     }

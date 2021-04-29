@@ -7,3 +7,4 @@ Zoom in/out: w/s
 Change max iterations: a/d  
 Invert drawing: i  
 Reset position and zoom: r  
+Cycle through fractals: c  
