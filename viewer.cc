@@ -34,7 +34,7 @@ int main() {
                 }
                 cout << '\n';
             }
-            cout << "Iterations: " << iterations << ", Zoom: " << zoom << ", Position: " <<  '(' << cur_x << ',' << cur_y << ")\n";
+//            cout << "Iterations: " << iterations << ", Zoom: " << zoom << ", Position: " <<  '(' << cur_x << ',' << cur_y << ")\n";
             redraw = false;
         }
         int ch = quick_read();
@@ -51,7 +51,11 @@ int main() {
             cur_x = cur_y = 0;
             zoom = 0.5;
         }
-        else if (ch == 'c') fractal_index = (fractal_index + 1) % fractals.size();
+        else if (ch == 'c') {
+            fractal_index = (fractal_index + 1) % fractals.size();
+            cur_x = cur_y = 0;
+            zoom = 0.5;
+        }
         else if (ch == 'i') swap(in_set,out_set);
         else redraw = false;
     }

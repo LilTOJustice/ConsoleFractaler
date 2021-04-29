@@ -1,2 +1,2 @@
-a.out: fractal.cc base.h
-	g++ -O3 fractal.cc -std=c++17
+a.out: viewer.cc base.h
+	g++ -O3 viewer.cc -std=c++17
