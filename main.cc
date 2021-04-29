@@ -1,6 +1,6 @@
-#include <colors.h>
+#include "colors.h"
 #include <utility>
-#include "Complex.h"
+#include <complex>
 using namespace std;
 
 //how many time to iterate mandelbrot (higher number = more precision)
@@ -9,25 +9,26 @@ size_t iterations = 20;
 #define max_radius 2
 //how much to zoom in when using w/a
 #define zoom_scale 0.1
-//how many pixels to move by when using arrow keys (is also scaled by screen size and zoom)
+//how many pixels to move by when using arrow keys (is also scaled by screen size and zoom, so its not really one pixel per step)
 #define step_size 3
 
-bool mandelbrot_test(const Complex &c) {
-    Complex result;
+bool mandelbrot_test(const complex<long double> &c) {
+    complex<long double> result;
     for (size_t i = 0; i < iterations; i++) {
-        result = (result ^ 2) + c;
+        result = (result * result) + c;
+        if ((result.real() - c.real())*(result.real() - c.real()) + (result.imag() - c.imag())*(result.imag() - c.imag()) > max_radius*max_radius) return false;
     }
-    return (result.real - c.real)*(result.real - c.real) + (result.imagine.coeff - c.imagine.coeff)*(result.imagine.coeff - c.imagine.coeff) < max_radius*max_radius;
+    return true;
 }
 
 int main() {
     int rows,cols;
-    double zoom = 0.5;
+    long double zoom = 0.5;
     char in_set = 'x', out_set = ' ';
     pair<int,int> term_size = get_terminal_size();
     rows = term_size.first;
     cols = term_size.second;
-    double cur_y = 0, cur_x = 0; //origin not relative to screen
+    long double cur_y = 0, cur_x = 0; //origin not relative to screen
     bool redraw = true;
     set_raw_mode(true);
     while (true) {
@@ -35,8 +36,8 @@ int main() {
             system("clear");
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    double cal_row = ((rows/2 - 1) - i)/zoom + cur_y, cal_col = (j - (cols/2 - 1))/zoom + cur_x;
-                    Complex c(cal_col/(cols/2), cal_row/(rows/2));
+                    long double cal_row = ((rows/2 - 1) - i)/zoom + cur_y, cal_col = (j - (cols/2 - 1))/zoom + cur_x;
+                    complex<long double> c(cal_col/(cols/2), cal_row/(rows/2));
                     cout << (mandelbrot_test(c) ? in_set : out_set);
                 }
                 cout << '\n';
