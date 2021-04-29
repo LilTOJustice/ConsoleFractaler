@@ -34,7 +34,7 @@ int main() {
                 }
                 cout << '\n';
             }
-//            cout << "Iterations: " << iterations << ", Zoom: " << zoom << ", Position: " <<  '(' << cur_x << ',' << cur_y << ")\n";
+            cout << "Iterations: " << iterations << ", Zoom: " << zoom << ", Position: " <<  '(' << cur_x << ',' << cur_y << ")\n";
             redraw = false;
         }
         int ch = quick_read();
