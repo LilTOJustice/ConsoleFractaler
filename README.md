@@ -1,5 +1,5 @@
 # ConsoleFractaler
-Extremely lightweight fractal viewer made for use in a console
+Extremely lightweight fractal viewer made for use in a UNIX console
 
 Controls (only relevent when running viewer.cc program):  
 Move: Arrow keys  
