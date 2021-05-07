@@ -10,7 +10,7 @@ inline bool fractal(const std::complex<long double> &c, std::complex<long double
     std::complex<long double> result(0,0);
     for (size_t i = 0; i < iterations; i++) {
         result = frac(result, c);
-        if (!radius_test(result,c)) return false;
+        if (result.real() >= 2 || result.imag() >= 2) return false;
     }
     return true;
 }
