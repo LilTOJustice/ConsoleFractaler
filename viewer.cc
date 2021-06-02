@@ -7,7 +7,7 @@ using namespace std;
 
 //VERY IMPORTANT: This number should be your screen aspect ratio (divide horizontal/vertical)
 #define aspect 1.7778 //default 16:9
-//how much to zoom in when using w/a
+//how much to zoom in when using w/s
 #define zoom_scale 0.1
 //how many pixels to move by when using arrow keys (is also scaled by screen size and zoom, so its not really one pixel per step)
 #define step_size 3
