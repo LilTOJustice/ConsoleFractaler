@@ -2,7 +2,7 @@
 //collection of functions/constants relevant to fractal computation
 #define max_radius 2
 size_t iterations = 50;
-//sup hottie
+
 inline bool radius_test(const std::complex<long double> &c, const std::complex<long double> &other) { //test if one complex number is within a *max_radius* distance of another
     return (c.real() - other.real())*(c.real() - other.real()) + (c.imag() - other.imag())*(c.imag() - other.imag()) < max_radius*max_radius;
 }
